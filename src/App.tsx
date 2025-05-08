@@ -1,13 +1,11 @@
-
-import './App.css'
+import { Button } from "@/components/Button/Button";
 
 function App() {
-
   return (
     <h1>
-      Empty starter
+      <Button>Say Hello</Button>
     </h1>
-  )
+  );
 }
 
-export default App
+export default App;
