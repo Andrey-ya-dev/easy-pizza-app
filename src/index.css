@@ -14,6 +14,8 @@
 
   --light-color: #fff;
   --seporator-color: #d4d6e0;
+
+  --bd-radius: 999px;
 }
 
 body {
