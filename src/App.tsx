@@ -1,6 +1,6 @@
 import { Button } from "@/components/Button/Button";
-import { Title } from "@/components/Typography/Title";
-import { Text } from "@/components/Typography/Text";
+import { Title } from "@/components/Typography";
+import { Text } from "@/components/Typography";
 import { Input } from "@/components/Input/Input";
 
 function App() {
