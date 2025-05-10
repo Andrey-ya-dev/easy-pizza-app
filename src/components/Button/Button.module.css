@@ -2,6 +2,7 @@
   border: 0;
   border-radius: var(--bd-radius);
   background-color: var(--bg-color-primary);
+  color: var(--light-color);
 }
 
 .main {
