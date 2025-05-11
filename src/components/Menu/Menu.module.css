@@ -1,0 +1,24 @@
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  list-style: none;
+  padding: 0;
+}
+
+.menuItem {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--color-primary);
+  transition: transform 0.2s, color 0.2s;
+}
+.menuItem:hover {
+  transform: translateY(2px);
+}
+
+.active {
+  color: var(--bg-color-primary);
+}

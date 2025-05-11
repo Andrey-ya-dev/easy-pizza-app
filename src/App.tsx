@@ -1,20 +1,7 @@
-import { Button } from "@/components/Button/Button";
-import { Title } from "@/components/Typography";
-import { Text } from "@/components/Typography";
-import { Input } from "@/components/Input/Input";
+import { Layout } from "@/layouts/Layout";
 
 function App() {
-  return (
-    <div>
-      <Title>This are components</Title>
-      <Button variant="large">Say Hello large</Button>
-      <Button variant="main">Say Hello main</Button>
-      <Button variant="round">Say Hello round</Button>
-      <Text Tag="p">Some text in paragraph</Text>
-      <Input placeholder="default" />
-      <Input withIcon placeholder="with icon" />
-    </div>
-  );
+  return <Layout />;
 }
 
 export default App;
