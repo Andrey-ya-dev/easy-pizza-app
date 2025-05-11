@@ -5,11 +5,23 @@ import { createBrowserRouter, RouterProvider } from "react-router";
 import "./index.css";
 import App from "./App.tsx";
 import { NotFoundPage } from "@/pages/NotFoundPage/NotFoundPage.tsx";
+import { CartPage } from "@/pages/CartPage/CartPage.tsx";
+import { MenuPage } from "@/pages/MenuPage/MenuPage.tsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    children: [
+      {
+        path: "/",
+        element: <MenuPage />,
+      },
+      {
+        path: "/cart",
+        element: <CartPage />,
+      },
+    ],
   },
   {
     path: "*",
