@@ -7,6 +7,7 @@ import App from "./App.tsx";
 import { NotFoundPage } from "@/pages/NotFoundPage/NotFoundPage.tsx";
 import { CartPage } from "@/pages/CartPage/CartPage.tsx";
 import { MenuPage } from "@/pages/MenuPage/MenuPage.tsx";
+import { OneProductPage } from "@/pages/OneProductPage/OneProductPage.tsx";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
       {
         path: "/cart",
         element: <CartPage />,
+      },
+      {
+        path: "/product/:id",
+        element: <OneProductPage />,
       },
     ],
   },

@@ -1,3 +1,15 @@
-.cart {
-  box-sizing: border-box;
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.main {
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  gap: 40px;
+  min-height: 80%;
+  width: 100%;
 }

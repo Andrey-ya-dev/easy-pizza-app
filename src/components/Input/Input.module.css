@@ -12,6 +12,7 @@
 .wrapper {
   position: relative;
   min-width: 256px;
+  height: fit-content;
 }
 
 .icon {

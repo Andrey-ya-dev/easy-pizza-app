@@ -24,11 +24,13 @@ body {
   font-family: var(--font-family);
 }
 
-button {
+button,
+a {
   cursor: pointer;
   transition: box-shadow 0.2s, transform 0.2s;
 }
-button:hover {
+button:hover,
+a.btn:hover {
   box-shadow: 0 4px 8px 1px rgba(0, 0, 0, 0.3);
 }
 button:active,
