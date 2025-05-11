@@ -3,36 +3,52 @@ import clsx from "clsx";
 
 import cls from "./Menu.module.css";
 
+interface MenuItemProps {
+  className?: string;
+  menuPath: string;
+  menuName: string;
+  icon?: { iconSrc: string; iconAlt: string };
+}
+export function MenuItem({
+  menuPath,
+  menuName,
+  icon,
+  className,
+  ...props
+}: MenuItemProps) {
+  return (
+    <li className={clsx(cls["item"])} {...props}>
+      <NavLink
+        to={`${menuPath}`}
+        className={({ isActive }) =>
+          clsx(cls["menuItem"], { [cls["active"]]: isActive }, className)
+        }
+      >
+        {icon?.iconSrc && icon.iconSrc.length > 0 && (
+          <span>
+            <img src={icon.iconSrc} alt={icon.iconAlt} />
+          </span>
+        )}
+        <span>{menuName}</span>
+      </NavLink>
+    </li>
+  );
+}
+
 export function Menu() {
   return (
     <nav>
       <ul className={cls.menu}>
-        <li>
-          <NavLink
-            to="/"
-            className={({ isActive }) =>
-              clsx(cls.menuItem, { [cls.active]: isActive })
-            }
-          >
-            <span>
-              <img src="/menu-icon.svg" alt="Иконка меню" />
-            </span>
-            <span>Меню</span>
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/cart"
-            className={({ isActive }) =>
-              clsx(cls.menuItem, { [cls.active]: isActive })
-            }
-          >
-            <span>
-              <img src="/cart-icon.svg" alt="Иконка корзины" />
-            </span>
-            <span>Корзина</span>
-          </NavLink>
-        </li>
+        <MenuItem
+          menuName="Меню"
+          menuPath="/"
+          icon={{ iconAlt: "Иконка меню", iconSrc: "/menu-icon.svg" }}
+        />
+        <MenuItem
+          menuName="Корзина"
+          menuPath="/cart"
+          icon={{ iconAlt: "Иконка корзины", iconSrc: "/cart-icon.svg" }}
+        />
       </ul>
     </nav>
   );
