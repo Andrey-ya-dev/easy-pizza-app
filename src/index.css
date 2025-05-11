@@ -13,7 +13,7 @@
   --bg-color-primary: #f3724c;
 
   --light-color: #fff;
-  --seporator-color: #d4d6e0;
+  --separator-color: #d4d6e0;
 
   --bd-radius: 999px;
 }
@@ -28,8 +28,7 @@ button {
   cursor: pointer;
   transition: box-shadow 0.2s, transform 0.2s;
 }
-button:hover,
-a:hover {
+button:hover {
   box-shadow: 0 4px 8px 1px rgba(0, 0, 0, 0.3);
 }
 button:active,
