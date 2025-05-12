@@ -1,0 +1,44 @@
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.formHeader {
+  text-align: center;
+}
+
+.formFields {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.formActions {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.formLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  text-align: center;
+}
+
+.formLinks a {
+  color: var(--bg-color-primary);
+}
+.formLinks a:hover {
+  transform: translateY(2px);
+}
+.formLinks a:active {
+  color: rgb(165, 23, 165);
+}
+
+.formLinkDescription {
+  color: var(--color-secondary);
+  font-size: 14px;
+}
