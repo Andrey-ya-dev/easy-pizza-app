@@ -39,9 +39,9 @@ export const InputText = (props: InputProps) =>
   Input({ ...props, type: "text" });
 
 export const InputEmail = (props: InputProps) => (
-  <Input type="email" name="email" id="email" {...props} />
+  <Input type="email" name="email" {...props} />
 );
 
 export const InputPassword = (props: InputProps) => (
-  <Input type="password" name="password" id="password" {...props} />
+  <Input type="password" name="password" {...props} />
 );

@@ -8,11 +8,19 @@ import { NotFoundPage } from "@/pages/NotFoundPage/NotFoundPage.tsx";
 import { CartPage } from "@/pages/CartPage/CartPage.tsx";
 import { MenuPage } from "@/pages/MenuPage/MenuPage.tsx";
 import { OneProductPage } from "@/pages/OneProductPage/OneProductPage.tsx";
+import { AuthLayout } from "@/layouts/AuthLayout/AuthLayout.tsx";
+import { LoginPage } from "@/pages/LoginPage/LoginPage.tsx";
+import { PrivateRoute } from "@/components/PrivateRoute/PrivateRoute.tsx";
+import { RegisterPage } from "./pages/RegisterPage/RegisterPage.tsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: (
+      <PrivateRoute>
+        <App />
+      </PrivateRoute>
+    ),
     children: [
       {
         path: "/",
@@ -25,6 +33,20 @@ const router = createBrowserRouter([
       {
         path: "/product/:id",
         element: <OneProductPage />,
+      },
+    ],
+  },
+  {
+    path: "auth",
+    element: <AuthLayout />,
+    children: [
+      {
+        path: "login",
+        element: <LoginPage />,
+      },
+      {
+        path: "register",
+        element: <RegisterPage />,
       },
     ],
   },
