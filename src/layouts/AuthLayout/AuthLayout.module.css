@@ -1,0 +1,21 @@
+.wrapper {
+  margin: 0 auto;
+  max-width: 1124px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+}
+
+.authPageLogo {
+  border-right: 1px solid var(--separator-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.authPageContent {
+  padding: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
