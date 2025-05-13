@@ -38,7 +38,7 @@ export const Input = ({
 export const InputText = (props: InputProps) =>
   Input({ ...props, type: "text" });
 
-export const InputEmail = (props: InputProps) => (
+export const InputEmail = (props: Omit<InputProps, "type">) => (
   <Input type="email" name="email" {...props} />
 );
 

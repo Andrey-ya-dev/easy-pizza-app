@@ -11,6 +11,15 @@ interface TitleProps extends HTMLAttributes<HTMLHeadingElement> {
   Tag?: HeaderTag;
 }
 
-export function Title({ children, className, Tag = "h3" }: TitleProps) {
-  return <Tag className={clsx(className)}>{children}</Tag>;
+export function Title({
+  children,
+  className,
+  Tag = "h3",
+  ...props
+}: TitleProps) {
+  return (
+    <Tag className={clsx(className)} {...props}>
+      {children}
+    </Tag>
+  );
 }
