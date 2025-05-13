@@ -42,7 +42,18 @@ export function MenuPage() {
       <div className={cls["main"]}>
         {!isLoading && <ProductList products={products} />}
         {isLoading && <Title>Загрузка...</Title>}
-        {errMsg && <Title>{errMsg}</Title>}
+        {errMsg && (
+          <Title
+            style={{
+              color: "red",
+              height: "fit-content",
+              padding: "20px",
+              backgroundColor: "lightgray",
+            }}
+          >
+            {errMsg}
+          </Title>
+        )}
       </div>
     </>
   );

@@ -10,6 +10,7 @@ export function OneProductPage() {
   const { id } = useParams();
   const [isLoading, setIsLoading] = useState(false);
   const [product, setProduct] = useState<ProductResponse | null>(null);
+  const [errMsg, setErrMsg] = useState("");
 
   useEffect(() => {
     setIsLoading(true);
@@ -19,6 +20,7 @@ export function OneProductPage() {
       if (Object.keys(data).includes("error")) {
         console.log("includes error");
         setIsLoading(false);
+        setErrMsg(data.message);
       } else {
         setProduct(data);
         setIsLoading(false);
@@ -40,6 +42,18 @@ export function OneProductPage() {
       <div className={cls["pageContent"]}>
         {!isLoading && product && <ProductCard {...product} />}
         {isLoading && <Title>Загрузка ...</Title>}
+        {errMsg.length > 0 && (
+          <Title
+            style={{
+              color: "red",
+              height: "fit-content",
+              padding: "20px",
+              backgroundColor: "lightgray",
+            }}
+          >
+            {errMsg}
+          </Title>
+        )}
       </div>
     </div>
   );
