@@ -58,3 +58,5 @@ export function MenuPage() {
     </>
   );
 }
+
+export default MenuPage;

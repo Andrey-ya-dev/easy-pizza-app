@@ -1,4 +1,4 @@
-import { StrictMode } from "react";
+import { lazy, StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router";
 
@@ -6,12 +6,13 @@ import "./index.css";
 import App from "./App.tsx";
 import { NotFoundPage } from "@/pages/NotFoundPage/NotFoundPage.tsx";
 import { CartPage } from "@/pages/CartPage/CartPage.tsx";
-import { MenuPage } from "@/pages/MenuPage/MenuPage.tsx";
 import { OneProductPage } from "@/pages/OneProductPage/OneProductPage.tsx";
 import { AuthLayout } from "@/layouts/AuthLayout/AuthLayout.tsx";
 import { LoginPage } from "@/pages/LoginPage/LoginPage.tsx";
 import { PrivateRoute } from "@/components/PrivateRoute/PrivateRoute.tsx";
 import { RegisterPage } from "./pages/RegisterPage/RegisterPage.tsx";
+
+const MenuPageLazy = lazy(() => import("./pages/MenuPage/MenuPage.tsx"));
 
 const router = createBrowserRouter([
   {
@@ -24,7 +25,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <MenuPage />,
+        element: <MenuPageLazy />,
       },
       {
         path: "/cart",
