@@ -1,10 +1,11 @@
+import { useState, type FormEvent } from "react";
+import { useNavigate } from "react-router";
+
 import { sendLogin } from "@/api/api";
 import { ErrorMessage } from "@/components/ErrorMessage/ErrorMessage";
 import { Form } from "@/components/Form/Form";
 import { FormItem } from "@/components/Form/FormItem/FormItem";
 import { InputEmail, InputPassword } from "@/components/Input/Input";
-import { useState, type FormEvent } from "react";
-import { useNavigate } from "react-router";
 
 type LoginFormType = {
   email: {

@@ -1,10 +1,10 @@
 import type { HTMLAttributes } from "react";
 import clsx from "clsx";
+import { Link } from "react-router";
 
 import cls from "./Form.module.css";
-import { Text, Title } from "../Typography";
-import { Button } from "../Button/Button";
-import { Link } from "react-router";
+import { Text, Title } from "@/components/Typography";
+import { Button } from "@/components/Button/Button";
 
 interface FormProps extends HTMLAttributes<HTMLFormElement> {
   className?: string;

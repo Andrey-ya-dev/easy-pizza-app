@@ -1,5 +1,5 @@
-import { Input } from "@/components/Input/Input";
 import cls from "./MenuPage.module.css";
+import { Input } from "@/components/Input/Input";
 import { Title } from "@/components/Typography";
 import { ProductList } from "@/components/ProductList/ProductList";
 import { useEffect, useState } from "react";

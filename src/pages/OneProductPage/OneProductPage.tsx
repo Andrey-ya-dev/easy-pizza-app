@@ -1,10 +1,11 @@
-import { Text, Title } from "@/components/Typography";
+import { useParams } from "react-router";
+import { useEffect, useState } from "react";
+
 import cls from "./OneProductPage.module.css";
+import { Text, Title } from "@/components/Typography";
 import type { ProductResponse } from "@/api/interfaces";
 import { ProductCard } from "@/components/ProductCard/ProductCard";
-import { useEffect, useState } from "react";
 import { getProducts } from "@/api/api";
-import { useParams } from "react-router";
 import { ErrorMessage } from "@/components/ErrorMessage/ErrorMessage";
 
 export function OneProductPage() {

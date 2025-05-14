@@ -10,7 +10,7 @@ import { OneProductPage } from "@/pages/OneProductPage/OneProductPage.tsx";
 import { AuthLayout } from "@/layouts/AuthLayout/AuthLayout.tsx";
 import { LoginPage } from "@/pages/LoginPage/LoginPage.tsx";
 import { PrivateRoute } from "@/components/PrivateRoute/PrivateRoute.tsx";
-import { RegisterPage } from "./pages/RegisterPage/RegisterPage.tsx";
+import { RegisterPage } from "@/pages/RegisterPage/RegisterPage.tsx";
 
 const MenuPageLazy = lazy(() => import("./pages/MenuPage/MenuPage.tsx"));
 
