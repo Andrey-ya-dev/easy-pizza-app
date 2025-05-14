@@ -1,8 +1,8 @@
 import { sendLogin } from "@/api/api";
+import { ErrorMessage } from "@/components/ErrorMessage/ErrorMessage";
 import { Form } from "@/components/Form/Form";
 import { FormItem } from "@/components/Form/FormItem/FormItem";
 import { InputEmail, InputPassword } from "@/components/Input/Input";
-import { Text } from "@/components/Typography";
 import { useState, type FormEvent } from "react";
 import { useNavigate } from "react-router";
 
@@ -48,18 +48,7 @@ export function LoginPage() {
       formLinkDesc="Нет аккаунта?"
       onSubmit={onSubmitForm}
     >
-      {errMsg.length > 0 && (
-        <Text
-          style={{
-            color: "red",
-            height: "fit-content",
-            padding: "20px",
-            backgroundColor: "lightgray",
-          }}
-        >
-          {errMsg}
-        </Text>
-      )}
+      {errMsg.length > 0 && <ErrorMessage errMsg={errMsg} variant />}
       <FormItem htmForName="emial" labelTitle="Ваш email">
         <InputEmail placeholder="Email" id="email" />
       </FormItem>

@@ -5,6 +5,7 @@ import { ProductList } from "@/components/ProductList/ProductList";
 import { useEffect, useState } from "react";
 import { getProducts } from "@/api/api";
 import type { ProductResponse } from "@/api/interfaces";
+import { ErrorMessage } from "@/components/ErrorMessage/ErrorMessage";
 
 export function MenuPage() {
   const [products, setProducts] = useState<ProductResponse[]>([]);
@@ -42,18 +43,7 @@ export function MenuPage() {
       <div className={cls["main"]}>
         {!isLoading && <ProductList products={products} />}
         {isLoading && <Title>Загрузка...</Title>}
-        {errMsg && (
-          <Title
-            style={{
-              color: "red",
-              height: "fit-content",
-              padding: "20px",
-              backgroundColor: "lightgray",
-            }}
-          >
-            {errMsg}
-          </Title>
-        )}
+        {errMsg && <ErrorMessage errMsg={errMsg} />}
       </div>
     </>
   );

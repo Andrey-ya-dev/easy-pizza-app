@@ -5,6 +5,7 @@ import { ProductCard } from "@/components/ProductCard/ProductCard";
 import { useEffect, useState } from "react";
 import { getProducts } from "@/api/api";
 import { useParams } from "react-router";
+import { ErrorMessage } from "@/components/ErrorMessage/ErrorMessage";
 
 export function OneProductPage() {
   const { id } = useParams();
@@ -42,18 +43,7 @@ export function OneProductPage() {
       <div className={cls["pageContent"]}>
         {!isLoading && product && <ProductCard {...product} />}
         {isLoading && <Title>Загрузка ...</Title>}
-        {errMsg.length > 0 && (
-          <Title
-            style={{
-              color: "red",
-              height: "fit-content",
-              padding: "20px",
-              backgroundColor: "lightgray",
-            }}
-          >
-            {errMsg}
-          </Title>
-        )}
+        {errMsg.length > 0 && <ErrorMessage errMsg={errMsg} />}
       </div>
     </div>
   );
