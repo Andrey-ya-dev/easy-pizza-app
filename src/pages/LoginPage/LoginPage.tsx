@@ -6,6 +6,8 @@ import { ErrorMessage } from "@/components/ErrorMessage/ErrorMessage";
 import { Form } from "@/components/Form/Form";
 import { FormItem } from "@/components/Form/FormItem/FormItem";
 import { InputEmail, InputPassword } from "@/components/Input/Input";
+import { useAppDispatch } from "@/store/hooks";
+import { userActions } from "@/store/userSlice";
 
 type LoginFormType = {
   email: {
@@ -19,6 +21,7 @@ type LoginFormType = {
 export function LoginPage() {
   const navigate = useNavigate();
   const [errMsg, setErrMsg] = useState("");
+  const dispatch = useAppDispatch();
 
   const onSubmitForm = async (e: FormEvent) => {
     e.preventDefault();
@@ -36,6 +39,7 @@ export function LoginPage() {
       } else {
         setErrMsg("");
         localStorage.setItem("jwt", loginData["access_token"]);
+        dispatch(userActions.addJwt(loginData["access_token"]));
         navigate("/");
       }
     }

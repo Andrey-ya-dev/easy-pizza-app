@@ -4,15 +4,28 @@ import cls from "./Layout.module.css";
 import { Text } from "@/components/Typography";
 import { Button } from "@/components/Button/Button";
 import { Menu } from "@/components/Menu/Menu";
+import { useAppDispatch } from "@/store/hooks";
+import { userActions } from "@/store/userSlice";
+import { useEffect } from "react";
 
 export function Layout() {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    const key = localStorage.getItem("jwt");
+
+    if (key) {
+      dispatch(userActions.addJwt(key));
+    }
+  }, []);
 
   const logout = () => {
     const key = localStorage.getItem("jwt");
 
     if (key) {
       localStorage.removeItem("jwt");
+      dispatch(userActions.removeJwt());
       navigate("/auth/login");
     }
   };

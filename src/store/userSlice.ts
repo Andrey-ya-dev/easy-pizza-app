@@ -1,0 +1,25 @@
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
+
+export interface UserState {
+  jwt: string | null;
+}
+
+const initialState: UserState = {
+  jwt: null,
+};
+
+export const userSlice = createSlice({
+  name: "user",
+  initialState,
+  reducers: {
+    addJwt(state, action: PayloadAction<string>) {
+      state.jwt = action.payload;
+    },
+    removeJwt(state) {
+      state.jwt = null;
+    },
+  },
+});
+
+export const userActions = userSlice.actions;
+export const userReducer = userSlice.reducer;
