@@ -1,10 +1,16 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { userReducer } from "./userSlice";
+import { JWT_PERSISTENT_STATE, userReducer } from "./userSlice";
+import { saveInStorageData } from "./storage";
 
 export const store = configureStore({
   reducer: {
     user: userReducer,
   },
+});
+
+// Подписка на изменения стора
+store.subscribe(() => {
+  saveInStorageData(JWT_PERSISTENT_STATE, { jwt: store.getState().user.jwt });
 });
 
 export type AppStore = typeof store;
