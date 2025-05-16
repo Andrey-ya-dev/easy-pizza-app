@@ -6,10 +6,10 @@ interface ErrorMessageProps {
 }
 
 const errStyle = {
-  color: "red",
+  color: "tomato",
   height: "fit-content",
   padding: "20px",
-  backgroundColor: "lightgray",
+  backgroundColor: "#7929ff",
 };
 
 export function ErrorMessage({ errMsg, variant = false }: ErrorMessageProps) {

@@ -1,24 +1,44 @@
-import { sendLogin } from "@/api/api";
 import {
   createAsyncThunk,
   createSlice,
   type PayloadAction,
 } from "@reduxjs/toolkit";
+import { sendLogin } from "@/api/api";
+import { loadStorageData } from "./storage";
 
 export const JWT_PERSISTENT_STATE = "userData";
 
+export interface ErrorField {
+  statusCode: number;
+  message: string[];
+  error: string;
+}
+
 export interface UserState {
   jwt: string | null;
+  isLoadingUser?: boolean;
+  isError?: boolean;
+  errorMsg: string;
 }
 
 const initialState: UserState = {
-  jwt: null,
+  jwt: loadStorageData(JWT_PERSISTENT_STATE).jwt ?? null,
+  isError: false,
+  isLoadingUser: false,
+  errorMsg: "",
 };
 
 export const login = createAsyncThunk(
   "user/login",
-  async (params: { email: string; password: string }) =>
-    sendLogin(params.email, params.password)
+  async (params: { email: string; password: string }, { rejectWithValue }) => {
+    const data = await sendLogin(params.email, params.password);
+
+    if (Object.keys(data).includes("error")) {
+      return rejectWithValue(data);
+    }
+
+    return data;
+  }
 );
 
 export const userSlice = createSlice({
@@ -28,6 +48,9 @@ export const userSlice = createSlice({
     removeJwt(state) {
       state.jwt = null;
       localStorage.removeItem(JWT_PERSISTENT_STATE);
+    },
+    clearError(state) {
+      state.errorMsg = "";
     },
   },
   extraReducers(builder) {
@@ -40,8 +63,21 @@ export const userSlice = createSlice({
         }>
       ) => {
         state.jwt = action.payload.access_token;
+        state.isError = false;
+        state.isLoadingUser = false;
+        state.errorMsg = "";
       }
     );
+    builder.addCase(login.rejected, (state, action) => {
+      const data = action.payload as ErrorField;
+      state.isLoadingUser = false;
+      if (Array.isArray(data.message)) {
+        state.errorMsg = data.message.join(" ");
+      } else {
+        state.errorMsg = data.message;
+      }
+      state.isError = true;
+    });
   },
 });
 

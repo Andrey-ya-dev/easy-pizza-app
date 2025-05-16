@@ -1,7 +1,7 @@
 import { useEffect, type FormEvent } from "react";
 import { useNavigate } from "react-router";
 
-// import { ErrorMessage } from "@/components/ErrorMessage/ErrorMessage";
+import { ErrorMessage } from "@/components/ErrorMessage/ErrorMessage";
 import { Form } from "@/components/Form/Form";
 import { FormItem } from "@/components/Form/FormItem/FormItem";
 import { InputEmail, InputPassword } from "@/components/Input/Input";
@@ -20,7 +20,7 @@ type LoginFormType = {
 export function LoginPage() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const jwt = useAppSelector((state) => state.user.jwt);
+  const { jwt, errorMsg: errMsg } = useAppSelector((state) => state.user);
 
   useEffect(() => {
     if (jwt) {
@@ -47,7 +47,7 @@ export function LoginPage() {
       formLinkDesc="Нет аккаунта?"
       onSubmit={onSubmitForm}
     >
-      {/* {errMsg.length > 0 && <ErrorMessage errMsg={errMsg} variant />} */}
+      {errMsg.length > 0 && <ErrorMessage errMsg={errMsg} variant />}
       <FormItem htmForName="emial" labelTitle="Ваш email">
         <InputEmail placeholder="Email" id="email" />
       </FormItem>
