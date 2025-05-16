@@ -1,13 +1,12 @@
-import { useState, type FormEvent } from "react";
+import { useEffect, type FormEvent } from "react";
 import { useNavigate } from "react-router";
 
-import { sendLogin } from "@/api/api";
-import { ErrorMessage } from "@/components/ErrorMessage/ErrorMessage";
+// import { ErrorMessage } from "@/components/ErrorMessage/ErrorMessage";
 import { Form } from "@/components/Form/Form";
 import { FormItem } from "@/components/Form/FormItem/FormItem";
 import { InputEmail, InputPassword } from "@/components/Input/Input";
-import { useAppDispatch } from "@/store/hooks";
-import { userActions } from "@/store/userSlice";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { login } from "@/store/userSlice";
 
 type LoginFormType = {
   email: {
@@ -20,8 +19,14 @@ type LoginFormType = {
 
 export function LoginPage() {
   const navigate = useNavigate();
-  const [errMsg, setErrMsg] = useState("");
   const dispatch = useAppDispatch();
+  const jwt = useAppSelector((state) => state.user.jwt);
+
+  useEffect(() => {
+    if (jwt) {
+      navigate("/");
+    }
+  }, [jwt, navigate]);
 
   const onSubmitForm = async (e: FormEvent) => {
     e.preventDefault();
@@ -30,18 +35,7 @@ export function LoginPage() {
     const { email, password } = target;
 
     if (email.value && password.value) {
-      const loginData = await sendLogin(email.value, String(password.value));
-
-      if (Object.keys(loginData).includes("error")) {
-        console.log(loginData, "include error");
-        setErrMsg(loginData.message);
-        return;
-      } else {
-        setErrMsg("");
-        localStorage.setItem("jwt", loginData["access_token"]);
-        dispatch(userActions.addJwt(loginData["access_token"]));
-        navigate("/");
-      }
+      dispatch(login({ email: email.value, password: password.value }));
     }
   };
   return (
@@ -53,7 +47,7 @@ export function LoginPage() {
       formLinkDesc="Нет аккаунта?"
       onSubmit={onSubmitForm}
     >
-      {errMsg.length > 0 && <ErrorMessage errMsg={errMsg} variant />}
+      {/* {errMsg.length > 0 && <ErrorMessage errMsg={errMsg} variant />} */}
       <FormItem htmForName="emial" labelTitle="Ваш email">
         <InputEmail placeholder="Email" id="email" />
       </FormItem>
