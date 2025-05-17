@@ -23,3 +23,26 @@
   justify-content: center;
   align-items: center;
 }
+
+.round-outline {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--light-color);
+  color: var(--bg-color-primary);
+  outline: 1px solid var(--bg-color-primary);
+}
+
+.ghost {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--light-color);
+  color: var(--bg-color-primary);
+}
