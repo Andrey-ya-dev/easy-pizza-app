@@ -8,12 +8,14 @@ interface MenuItemProps {
   menuPath: string;
   menuName: string;
   icon?: { iconSrc: string; iconAlt: string };
+  count?: boolean;
 }
 export function MenuItem({
   menuPath,
   menuName,
   icon,
   className,
+  count = false,
   ...props
 }: MenuItemProps) {
   return (
@@ -31,6 +33,7 @@ export function MenuItem({
         )}
         <span>{menuName}</span>
       </NavLink>
+      {count && <span className={cls["menuCount"]}>0</span>}
     </li>
   );
 }
@@ -45,6 +48,7 @@ export function Menu() {
           icon={{ iconAlt: "Иконка меню", iconSrc: "/menu-icon.svg" }}
         />
         <MenuItem
+          count
           menuName="Корзина"
           menuPath="/cart"
           icon={{ iconAlt: "Иконка корзины", iconSrc: "/cart-icon.svg" }}
