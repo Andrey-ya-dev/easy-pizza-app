@@ -22,7 +22,7 @@ export interface UserState {
 }
 
 const initialState: UserState = {
-  jwt: loadStorageData(JWT_PERSISTENT_STATE).jwt ?? null,
+  jwt: loadStorageData(JWT_PERSISTENT_STATE)?.jwt ?? null,
   isError: false,
   isLoadingUser: false,
   errorMsg: "",
