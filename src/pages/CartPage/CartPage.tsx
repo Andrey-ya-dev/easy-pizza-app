@@ -10,11 +10,13 @@ import { getProducts } from "@/api/api";
 import type { ProductResponse } from "@/api/interfaces";
 import { cartActions } from "@/store/cartSlice";
 
+const DELIVERY_FEE = 169;
+
 export function CartPage() {
   const [cartProducts, setCartProducts] = useState<ProductResponse[]>([]);
   const items = useAppSelector((state) => state.cart.items);
   const dispatch = useAppDispatch();
-  const toPrice = useMemo(
+  const total = useMemo(
     () =>
       items.reduce((acc, item) => {
         const product = cartProducts.find(
@@ -88,20 +90,26 @@ export function CartPage() {
               <li className={cls["resultListItem"]}>
                 <Text className={cls["resultTitle"]}>Общая цена</Text>
                 <Text className={cls["resultValue"]}>
-                  {toPrice}&nbsp;
+                  {total}&nbsp;
                   <small className={cls["resultValuePrice"]}>₱</small>
                 </Text>
               </li>
               <li className={cls["resultListItem"]}>
                 <Text className={cls["resultTitle"]}>Доставка</Text>
                 <Text className={cls["resultValue"]}>
-                  190 <small className={cls["resultValuePrice"]}>₱</small>
+                  {DELIVERY_FEE}&nbsp;
+                  <small className={cls["resultValuePrice"]}>₱</small>
                 </Text>
               </li>
               <li className={cls["resultListItem"]}>
-                <Text className={cls["resultTitle"]}>Итог</Text>
+                <Text className={cls["resultTitle"]}>
+                  Итог&nbsp;
+                  <small className={cls["resultValuePrice"]}>
+                    ({items.length})
+                  </small>
+                </Text>
                 <Text className={cls["resultValue"]}>
-                  {toPrice + 190}
+                  {total + DELIVERY_FEE}&nbsp;
                   <small className={cls["resultValuePrice"]}>₱</small>
                 </Text>
               </li>

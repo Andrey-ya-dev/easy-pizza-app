@@ -35,7 +35,7 @@ export function CartItem({
       <div className={cls["cartListItemInfo"]}>
         <Title className={cls["cartListItemInfoTitle"]}>{name}</Title>
         <Text className={cls["price"]}>
-          {price}
+          {price}&nbsp;
           <small>₱</small>
         </Text>
       </div>

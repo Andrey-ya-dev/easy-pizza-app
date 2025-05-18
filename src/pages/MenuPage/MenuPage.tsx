@@ -16,7 +16,7 @@ export function MenuPage() {
 
   useEffect(() => {
     setIsLoading(true);
-    const id = setTimeout(async () => {
+    const loadProducts = async () => {
       const data = await getProducts("products", searchStr);
       if (Object.keys(data).includes("error")) {
         console.log("includes error");
@@ -28,11 +28,9 @@ export function MenuPage() {
         setProducts(data);
         setIsLoading(false);
       }
-    }, 2000);
-
-    return () => {
-      clearTimeout(id);
     };
+
+    loadProducts();
   }, [searchStr]);
 
   const searchUpdate = (e: ChangeEvent<HTMLInputElement>) =>
