@@ -2,20 +2,23 @@ import { NavLink } from "react-router";
 import clsx from "clsx";
 
 import cls from "./Menu.module.css";
+import { useAppSelector } from "@/store/hooks";
 
 interface MenuItemProps {
   className?: string;
   menuPath: string;
   menuName: string;
   icon?: { iconSrc: string; iconAlt: string };
-  count?: boolean;
+  isCount?: boolean;
+  count?: number;
 }
 export function MenuItem({
   menuPath,
   menuName,
   icon,
   className,
-  count = false,
+  isCount = false,
+  count,
   ...props
 }: MenuItemProps) {
   return (
@@ -33,12 +36,13 @@ export function MenuItem({
         )}
         <span>{menuName}</span>
       </NavLink>
-      {count && <span className={cls["menuCount"]}>0</span>}
+      {isCount && <span className={cls["menuCount"]}>{count}</span>}
     </li>
   );
 }
 
 export function Menu() {
+  const items = useAppSelector((state) => state.cart.items);
   return (
     <nav>
       <ul className={cls.menu}>
@@ -48,7 +52,8 @@ export function Menu() {
           icon={{ iconAlt: "Иконка меню", iconSrc: "/menu-icon.svg" }}
         />
         <MenuItem
-          count
+          count={items.reduce((acc, item) => acc + item.count, 0)}
+          isCount
           menuName="Корзина"
           menuPath="/cart"
           icon={{ iconAlt: "Иконка корзины", iconSrc: "/cart-icon.svg" }}

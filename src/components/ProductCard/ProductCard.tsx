@@ -6,6 +6,8 @@ import cls from "./ProductCard.module.css";
 import { Title } from "@/components/Typography";
 import { Button } from "@/components/Button/Button";
 import type { ProductResponse } from "@/api/interfaces";
+import { useAppDispatch } from "@/store/hooks";
+import { cartActions } from "@/store/cartSlice";
 
 export type ProductCardProps = {
   className?: string;
@@ -23,6 +25,11 @@ export function ProductCard({
   ...props
 }: ProductCardProps) {
   const { id: paramId } = useParams();
+  const dispatch = useAppDispatch();
+
+  const addProductToCart = () => {
+    dispatch(cartActions.addProduct(Number(id)));
+  };
 
   return (
     <div data-i={id} className={clsx(cls.productCard, className)} {...props}>
@@ -31,7 +38,7 @@ export function ProductCard({
           {price} &nbsp;
           <span className={cls.currency}>₱</span>
         </div>
-        <Button variant="round" className={cls.icon}>
+        <Button variant="round" className={cls.icon} onClick={addProductToCart}>
           <img src="/cart-button-icon.svg" alt="Иконка корзины" />
         </Button>
         <img src={`${image}`} alt="Картинка продукта" className={cls.img} />
