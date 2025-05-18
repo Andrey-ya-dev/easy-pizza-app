@@ -3,10 +3,19 @@ import {
   createSlice,
   type PayloadAction,
 } from "@reduxjs/toolkit";
-import { sendLogin } from "@/api/api";
+import { getUser, sendLogin } from "@/api/api";
 import { loadStorageData } from "./storage";
+import type { RootState } from "./store";
 
 export const JWT_PERSISTENT_STATE = "userData";
+
+export interface UserProfile {
+  id: number;
+  email: string;
+  address: string;
+  name: string;
+  phone: number;
+}
 
 export interface ErrorField {
   statusCode: number;
@@ -19,6 +28,7 @@ export interface UserState {
   isLoadingUser?: boolean;
   isError?: boolean;
   errorMsg: string;
+  userProfile?: UserProfile;
 }
 
 const initialState: UserState = {
@@ -41,6 +51,18 @@ export const login = createAsyncThunk(
   }
 );
 
+export const getUserData = createAsyncThunk<
+  UserProfile,
+  void,
+  { state: RootState }
+>("user/getUserData", async (_, thunkApi) => {
+  const jwt = thunkApi.getState().user.jwt;
+  if (jwt) {
+    const data = await getUser(`Bearer ${jwt}`);
+    return data;
+  }
+});
+
 export const userSlice = createSlice({
   name: "user",
   initialState,
@@ -54,6 +76,7 @@ export const userSlice = createSlice({
     },
   },
   extraReducers(builder) {
+    // login case
     builder.addCase(
       login.fulfilled,
       (
@@ -77,6 +100,10 @@ export const userSlice = createSlice({
         state.errorMsg = data.message;
       }
       state.isError = true;
+    });
+    // get user data case
+    builder.addCase(getUserData.fulfilled, (state, action) => {
+      state.userProfile = action.payload;
     });
   },
 });

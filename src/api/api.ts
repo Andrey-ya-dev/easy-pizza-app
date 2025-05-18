@@ -33,3 +33,19 @@ export const sendLogin = async (email: string, password: string) => {
     return err;
   }
 };
+
+export const getUser = async (jwt: string) => {
+  try {
+    const res = await fetch(`${BASE_URL}/user/profile`, {
+      headers: {
+        Authorization: `${jwt}`,
+      },
+    });
+    const data = await res.json();
+
+    return data;
+  } catch (err) {
+    console.log(err);
+    return err;
+  }
+};
