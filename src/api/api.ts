@@ -1,8 +1,10 @@
 import { BASE_URL } from "./baseURL";
 
-export const getProducts = async (url: string) => {
+export const getProducts = async (url: string, name?: string) => {
+  const params = new URLSearchParams({ name: name ? name : "" }).toString();
+  const finalUrl = name ? `${BASE_URL}/${url}?${params}` : `${BASE_URL}/${url}`;
   try {
-    const res = await fetch(`${BASE_URL}/${url}`);
+    const res = await fetch(finalUrl);
     const data = await res.json();
 
     return data;
