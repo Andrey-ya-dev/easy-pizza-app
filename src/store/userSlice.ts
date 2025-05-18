@@ -3,7 +3,7 @@ import {
   createSlice,
   type PayloadAction,
 } from "@reduxjs/toolkit";
-import { getUser, sendLogin } from "@/api/api";
+import { getUser, sendLogin, register } from "@/api/api";
 import { loadStorageData } from "./storage";
 import type { RootState } from "./store";
 
@@ -28,6 +28,8 @@ export interface UserState {
   isLoadingUser?: boolean;
   isError?: boolean;
   errorMsg: string;
+  errorMsgRegister: string;
+  isErrorRegister?: boolean;
   userProfile?: UserProfile;
 }
 
@@ -36,12 +38,29 @@ const initialState: UserState = {
   isError: false,
   isLoadingUser: false,
   errorMsg: "",
+  errorMsgRegister: "",
 };
 
 export const login = createAsyncThunk(
   "user/login",
   async (params: { email: string; password: string }, { rejectWithValue }) => {
     const data = await sendLogin(params.email, params.password);
+
+    if (Object.keys(data).includes("error")) {
+      return rejectWithValue(data);
+    }
+
+    return data;
+  }
+);
+
+export const registerUser = createAsyncThunk(
+  "user/register",
+  async (
+    params: { email: string; password: string; name: string },
+    { rejectWithValue }
+  ) => {
+    const data = await register(params.email, params.password, params.name);
 
     if (Object.keys(data).includes("error")) {
       return rejectWithValue(data);
@@ -76,7 +95,7 @@ export const userSlice = createSlice({
     },
   },
   extraReducers(builder) {
-    // login case
+    // login cases
     builder.addCase(
       login.fulfilled,
       (
@@ -101,9 +120,32 @@ export const userSlice = createSlice({
       }
       state.isError = true;
     });
-    // get user data case
+    // get user data cases
     builder.addCase(getUserData.fulfilled, (state, action) => {
       state.userProfile = action.payload;
+    });
+    // register cases
+    builder.addCase(
+      registerUser.fulfilled,
+      (
+        state,
+        action: PayloadAction<{
+          access_token: string;
+        }>
+      ) => {
+        state.jwt = action.payload.access_token;
+        state.isErrorRegister = false;
+        state.errorMsgRegister = "";
+      }
+    );
+    builder.addCase(registerUser.rejected, (state, action) => {
+      const data = action.payload as ErrorField;
+      if (Array.isArray(data.message)) {
+        state.errorMsgRegister = data.message.join(" ");
+      } else {
+        state.errorMsgRegister = data.message;
+      }
+      state.isErrorRegister = true;
     });
   },
 });

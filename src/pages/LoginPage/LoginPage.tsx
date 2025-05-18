@@ -48,7 +48,7 @@ export function LoginPage() {
       onSubmit={onSubmitForm}
     >
       {errMsg.length > 0 && <ErrorMessage errMsg={errMsg} variant />}
-      <FormItem htmForName="emial" labelTitle="Ваш email">
+      <FormItem htmForName="email" labelTitle="Ваш email">
         <InputEmail placeholder="Email" id="email" />
       </FormItem>
       <FormItem htmForName="password" labelTitle="Ваш пароль">
