@@ -54,7 +54,7 @@ export function ProductCard({
           to={paramId ? "/" : `/product/${id}`}
           className={clsx(cls.link, "btn")}
         >
-          {paramId ? "← Назад" : "Подробнее"}
+          Подробнее
         </Link>
       </div>
     </div>
