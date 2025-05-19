@@ -46,3 +46,12 @@
   background-color: var(--light-color);
   color: var(--bg-color-primary);
 }
+
+.chevron {
+  border-radius: 12px;
+  color: var(--color-primary);
+  font-size: 20px;
+  background-color: var(--separator-color-light);
+  width: 40px;
+  height: 40px;
+}

@@ -3,7 +3,13 @@ import clsx from "clsx";
 
 import cls from "./Button.module.css";
 
-type ButtonVariant = "main" | "round" | "large" | "round-outline" | "ghost";
+type ButtonVariant =
+  | "main"
+  | "round"
+  | "large"
+  | "round-outline"
+  | "ghost"
+  | "chevron";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;
