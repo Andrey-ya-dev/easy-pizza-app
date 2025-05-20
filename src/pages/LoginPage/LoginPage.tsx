@@ -6,7 +6,7 @@ import { Form } from "@/components/Form/Form";
 import { FormItem } from "@/components/Form/FormItem/FormItem";
 import { InputEmail, InputPassword } from "@/components/Input/Input";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { login } from "@/store/userSlice";
+import { login, userActions } from "@/store/userSlice";
 
 type LoginFormType = {
   email: {
@@ -21,6 +21,10 @@ export function LoginPage() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { jwt, errorMsg: errMsg } = useAppSelector((state) => state.user);
+
+  useEffect(() => {
+    dispatch(userActions.clearError());
+  }, [dispatch]);
 
   useEffect(() => {
     if (jwt) {

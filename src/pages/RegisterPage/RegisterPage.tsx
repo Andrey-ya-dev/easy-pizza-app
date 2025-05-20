@@ -5,7 +5,7 @@ import { Form } from "@/components/Form/Form";
 import { FormItem } from "@/components/Form/FormItem/FormItem";
 import { InputEmail, InputPassword, InputText } from "@/components/Input/Input";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { registerUser } from "@/store/userSlice";
+import { registerUser, userActions } from "@/store/userSlice";
 import { ErrorMessage } from "@/components/ErrorMessage/ErrorMessage";
 
 type RegisterFormType = {
@@ -26,6 +26,10 @@ export function RegisterPage() {
   const { errorMsgRegister, isErrorRegister, jwt } = useAppSelector(
     (state) => state.user
   );
+
+  useEffect(() => {
+    dispatch(userActions.clearRegisterError());
+  }, [dispatch]);
 
   useEffect(() => {
     if (jwt) {

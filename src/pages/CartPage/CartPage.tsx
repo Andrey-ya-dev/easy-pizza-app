@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { useNavigate } from "react-router";
 
 import cls from "./CartPage.module.css";
 import { CartItem } from "./CartItem/CartItem";
@@ -9,12 +10,15 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { getProducts } from "@/api/api";
 import type { ProductResponse } from "@/api/interfaces";
 import { cartActions } from "@/store/cartSlice";
+import { BASE_URL } from "@/api/baseURL";
 
 const DELIVERY_FEE = 169;
 
 export function CartPage() {
+  const navigate = useNavigate();
   const [cartProducts, setCartProducts] = useState<ProductResponse[]>([]);
   const items = useAppSelector((state) => state.cart.items);
+  const jwt = useAppSelector((state) => state.user.jwt);
   const dispatch = useAppDispatch();
   const total = useMemo(
     () =>
@@ -52,6 +56,22 @@ export function CartPage() {
 
   const deleteItem = (id: number) => {
     dispatch(cartActions.deleteProduct(id));
+  };
+
+  const checkout = async () => {
+    const response = await fetch(`${BASE_URL}/order`, {
+      method: "POST",
+      body: JSON.stringify({
+        products: items,
+      }),
+      headers: {
+        Authorization: `Bearer ${jwt}`,
+      },
+    });
+    const data = await response.json();
+    dispatch(cartActions.clearCart());
+    navigate("/success");
+    return data;
   };
 
   return (
@@ -114,7 +134,9 @@ export function CartPage() {
                 </Text>
               </li>
             </ul>
-            <Button variant="large">Оформить</Button>
+            <Button variant="large" onClick={checkout}>
+              Оформить
+            </Button>
           </div>
         </div>
       </div>

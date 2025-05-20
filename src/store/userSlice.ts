@@ -93,6 +93,10 @@ export const userSlice = createSlice({
     clearError(state) {
       state.errorMsg = "";
     },
+    clearRegisterError(state) {
+      state.errorMsgRegister = "";
+      state.isErrorRegister = false;
+    },
   },
   extraReducers(builder) {
     // login cases
