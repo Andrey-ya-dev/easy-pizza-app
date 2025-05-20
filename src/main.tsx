@@ -13,6 +13,7 @@ import { LoginPage } from "@/pages/LoginPage/LoginPage.tsx";
 import { PrivateRoute } from "@/components/PrivateRoute/PrivateRoute.tsx";
 import { RegisterPage } from "@/pages/RegisterPage/RegisterPage.tsx";
 import { store } from "@/store/store.ts";
+import { SuccessPage } from "@/pages/SuccessPage/SuccessPage.tsx";
 
 const MenuPageLazy = lazy(() => import("./pages/MenuPage/MenuPage.tsx"));
 
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
       {
         path: "/product/:id",
         element: <OneProductPage />,
+      },
+      {
+        path: "/success",
+        element: <SuccessPage />,
       },
     ],
   },
