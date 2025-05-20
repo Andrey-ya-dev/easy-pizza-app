@@ -48,10 +48,14 @@
 }
 
 .chevron {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 12px;
   color: var(--color-primary);
   font-size: 20px;
-  background-color: var(--separator-color-light);
+  background-color: var(--light-color);
   width: 40px;
   height: 40px;
+  box-shadow: 0 4px 8px 1px rgba(0, 0, 0, 0.1);
 }

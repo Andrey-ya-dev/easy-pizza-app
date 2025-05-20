@@ -49,7 +49,7 @@ export function OneProductPage() {
     <div className={cls["wrapper"]}>
       <div className={cls["pageHead"]}>
         <Button variant="chevron" onClick={goToBack}>
-          ←
+          <img src="/chevron-left.svg" alt="Иконка галка влево" />
         </Button>
         <Title Tag="h1">
           <Text className={cls["productName"]}>{product?.name}</Text>
