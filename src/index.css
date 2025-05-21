@@ -38,6 +38,10 @@ button:active,
 a:active {
   transform: translateY(2px);
 }
+button:disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
 
 a {
   text-decoration: none;
