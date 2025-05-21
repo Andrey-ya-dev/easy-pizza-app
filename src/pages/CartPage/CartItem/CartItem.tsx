@@ -44,6 +44,7 @@ export function CartItem({
           variant="round-outline"
           className={cls["cartBtn"]}
           onClick={() => removeItem(Number(id))}
+          disabled={count === 1}
         >
           -
         </Button>
