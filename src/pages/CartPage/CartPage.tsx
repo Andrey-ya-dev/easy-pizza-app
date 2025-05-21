@@ -11,6 +11,7 @@ import { getProducts } from "@/api/api";
 import type { ProductResponse } from "@/api/interfaces";
 import { cartActions } from "@/store/cartSlice";
 import { BASE_URL } from "@/api/baseURL";
+import { Message } from "@/components/Message/Message";
 
 const DELIVERY_FEE = 169;
 
@@ -81,24 +82,28 @@ export function CartPage() {
       </div>
       <div className={cls["sectionContent"]}>
         <ul className={cls["cartList"]}>
-          {items.map((item) => {
-            const product = cartProducts.find(
-              (p) => String(p.id) === String(item.id)
-            );
-            if (!product) {
-              return;
-            }
-            return (
-              <CartItem
-                key={product.id}
-                {...product}
-                count={item.count}
-                addItem={addItem}
-                removeItem={removeItem}
-                deleteItem={deleteItem}
-              />
-            );
-          })}
+          {items.length > 0 ? (
+            items.map((item) => {
+              const product = cartProducts.find(
+                (p) => String(p.id) === String(item.id)
+              );
+              if (!product) {
+                return;
+              }
+              return (
+                <CartItem
+                  key={product.id}
+                  {...product}
+                  count={item.count}
+                  addItem={addItem}
+                  removeItem={removeItem}
+                  deleteItem={deleteItem}
+                />
+              );
+            })
+          ) : (
+            <Message>Нет товаров в корзине</Message>
+          )}
         </ul>
         <div className={cls["cartActions"]}>
           <div className={cls["promocode"]}>
@@ -134,7 +139,11 @@ export function CartPage() {
                 </Text>
               </li>
             </ul>
-            <Button variant="large" onClick={checkout}>
+            <Button
+              variant="large"
+              onClick={checkout}
+              disabled={!(items.length > 0)}
+            >
               Оформить
             </Button>
           </div>

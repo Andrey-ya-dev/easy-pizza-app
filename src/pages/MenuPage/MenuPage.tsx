@@ -7,6 +7,7 @@ import { ProductList } from "@/components/ProductList/ProductList";
 import { getProducts } from "@/api/api";
 import type { ProductResponse } from "@/api/interfaces";
 import { ErrorMessage } from "@/components/ErrorMessage/ErrorMessage";
+import { Message } from "@/components/Message/Message";
 
 export function MenuPage() {
   const [products, setProducts] = useState<ProductResponse[]>([]);
@@ -30,7 +31,13 @@ export function MenuPage() {
       }
     };
 
-    loadProducts();
+    const id = setTimeout(() => {
+      loadProducts();
+    }, 500);
+
+    return () => {
+      clearTimeout(id);
+    };
   }, [searchStr]);
 
   const searchUpdate = (e: ChangeEvent<HTMLInputElement>) =>
@@ -53,20 +60,7 @@ export function MenuPage() {
           <ProductList products={products} />
         )}
         {!isLoading && products.length === 0 && (
-          <div
-            style={{
-              width: "100%",
-              height: "100%",
-              gridColumn: "span 2",
-              display: "flex",
-              marginTop: "150px",
-              justifyContent: "center",
-              fontSize: "22px",
-              color: "lightgrey",
-            }}
-          >
-            <Title>Таких блюд не найдено</Title>
-          </div>
+          <Message>Таких блюд не найдено</Message>
         )}
         {isLoading && <Title>Загрузка...</Title>}
         {errMsg && <ErrorMessage errMsg={errMsg} />}
