@@ -1,8 +1,9 @@
 # Проектная работа "easy-pizza-app"
 
-Стек: React, TS, CSS modules, Redux Toolkit, React router, Vite, ES lint, clsx
+### Стек: 
+- React, TS, CSS modules, Redux Toolkit, React router, Vite, ES lint, clsx
 
-Структура проекта:
+### Структура проекта:
 
 - src/ — исходные файлы проекта
 - src/components/ — папка с React компонентами
