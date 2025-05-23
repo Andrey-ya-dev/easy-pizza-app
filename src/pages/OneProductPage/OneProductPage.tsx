@@ -7,9 +7,9 @@ import type { ProductResponse } from "@/api/interfaces";
 import { getProducts } from "@/api/api";
 import { ErrorMessage } from "@/components/ErrorMessage/ErrorMessage";
 import { Button } from "@/components/Button/Button";
-import { Rating } from "@/components/Rating/Rating";
 import { useAppDispatch } from "@/store/hooks";
 import { cartActions } from "@/store/cartSlice";
+import { ProductCardFull } from "./ProductCardFull/ProductCardFull";
 
 export function OneProductPage() {
   const navigate = useNavigate();
@@ -64,53 +64,7 @@ export function OneProductPage() {
       <div className={cls["pageContent"]}>
         {isLoading && <Title>Загрузка ...</Title>}
         {errMsg.length > 0 && <ErrorMessage errMsg={errMsg} />}
-        {!isLoading && product && (
-          <div className={cls["productCard"]}>
-            <img
-              src={`${product?.image}`}
-              alt="Картинка товара"
-              className={cls["productCard__img"]}
-            />
-            <div className={cls["productCard__info"]}>
-              <div className={cls["productCard__info-item"]}>
-                <Text className={cls["productCard__info-item__title"]}>
-                  Цена
-                </Text>
-                <Text className={cls["productCard__info-item__price"]}>
-                  {product?.price} &nbsp;
-                  <small
-                    className={cls["productCard__info-item__currency-symbol"]}
-                  >
-                    ₱
-                  </small>
-                </Text>
-              </div>
-              <div className={cls["productCard__info-item"]}>
-                <Text className={cls["productCard__info-item__title"]}>
-                  Рейтинг
-                </Text>
-                <Rating rating={product ? product?.rating : 0} />
-              </div>
-              <div className={cls["productCard__info-item"]}>
-                <Text className={cls["productCard__info-item__title"]}>
-                  Состав
-                </Text>
-                <ul className={cls["productCard__info-item__list"]}>
-                  {product?.ingredients.map((ingredient) => {
-                    return (
-                      <li
-                        key={ingredient}
-                        className={cls["productCard__info-item__list-item"]}
-                      >
-                        {ingredient}
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
-            </div>
-          </div>
-        )}
+        {!isLoading && product && <ProductCardFull product={product} />}
       </div>
     </div>
   );
