@@ -38,7 +38,12 @@ export function ProductCard({
           {price} &nbsp;
           <span className={cls.currency}>₱</span>
         </div>
-        <Button variant="round" className={cls.icon} onClick={addProductToCart}>
+        <Button
+          title="Добавить продукт в корзину"
+          variant="round"
+          className={cls.icon}
+          onClick={addProductToCart}
+        >
           <img src="/cart-button-icon.svg" alt="Иконка корзины" />
         </Button>
         <img src={`${image}`} alt="Картинка продукта" className={cls.img} />
@@ -51,6 +56,7 @@ export function ProductCard({
         <Title>{name}</Title>
         <span className={cls.components}>{ingredients.join(", ")}</span>
         <Link
+          title="Посмотреть подробнее"
           to={paramId ? "/" : `/product/${id}`}
           className={clsx(cls.link, "btn")}
         >
