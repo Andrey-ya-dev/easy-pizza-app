@@ -28,10 +28,6 @@
 
 .price,
 .rating {
-  background-color: #fff;
-  padding: 4px 12px;
-  font-size: 18px;
-  border-radius: 20px;
   top: 10px;
   left: 10px;
 }
@@ -39,10 +35,6 @@
 .rating {
   top: auto;
   bottom: -12px;
-  box-shadow: 0 2px 16px 1px rgba(0, 0, 0, 0.3);
-  font-size: 12px;
-  display: flex;
-  gap: 4px;
 }
 
 .icon {
@@ -60,10 +52,6 @@
 .footer {
   padding: 12px;
   position: relative;
-}
-
-.currency {
-  color: var(--bg-color-primary);
 }
 
 .link {
