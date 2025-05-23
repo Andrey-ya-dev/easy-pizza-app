@@ -1,0 +1,13 @@
+.productCard__info-item {
+  display: flex;
+  justify-content: space-between;
+  max-width: 280px;
+}
+
+.productCard__info-item__title {
+  font-weight: bold;
+}
+
+.productCard__info-item:last-child {
+  display: block;
+}

@@ -1,0 +1,11 @@
+.productCard {
+  display: flex;
+  gap: 40px;
+}
+
+.productCard__img {
+  border-radius: 20px;
+  width: 320px;
+  height: 220px;
+  object-fit: cover;
+}

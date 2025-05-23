@@ -1,0 +1,9 @@
+.productCard__info {
+  flex: 1;
+  display: grid;
+  gap: 40px;
+}
+
+.productCard__info-item__currency-symbol {
+  color: var(--separator-color);
+}
