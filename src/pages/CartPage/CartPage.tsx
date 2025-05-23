@@ -2,8 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router";
 
 import cls from "./CartPage.module.css";
-import { CartItem } from "./CartItem/CartItem";
-import { Text, Title } from "@/components/Typography";
+import { Title } from "@/components/Typography";
 import { Input } from "@/components/Input/Input";
 import { Button } from "@/components/Button/Button";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
@@ -11,7 +10,8 @@ import { getProducts } from "@/api/api";
 import type { ProductResponse } from "@/api/interfaces";
 import { cartActions } from "@/store/cartSlice";
 import { BASE_URL } from "@/api/baseURL";
-import { Message } from "@/components/Message/Message";
+import { CartResultList } from "./CartResultList/CartResultList";
+import { CartProductList } from "./CartProductList/CartProductList";
 
 const DELIVERY_FEE = 169;
 
@@ -81,64 +81,24 @@ export function CartPage() {
         <Title Tag="h1">Корзина</Title>
       </div>
       <div className={cls["sectionContent"]}>
-        <ul className={cls["cartList"]}>
-          {items.length > 0 ? (
-            items.map((item) => {
-              const product = cartProducts.find(
-                (p) => String(p.id) === String(item.id)
-              );
-              if (!product) {
-                return;
-              }
-              return (
-                <CartItem
-                  key={product.id}
-                  {...product}
-                  count={item.count}
-                  addItem={addItem}
-                  removeItem={removeItem}
-                  deleteItem={deleteItem}
-                />
-              );
-            })
-          ) : (
-            <Message>Нет товаров в корзине</Message>
-          )}
-        </ul>
+        <CartProductList
+          addItem={addItem}
+          removeItem={removeItem}
+          deleteItem={deleteItem}
+          cartProducts={cartProducts}
+          items={items}
+        />
         <div className={cls["cartActions"]}>
           <div className={cls["promocode"]}>
             <Input placeholder="Ввести промокод" id={cls["promoInput"]} />
             <Button className={cls["promoBtn"]}>Применить</Button>
           </div>
           <div className={cls["result"]}>
-            <ul className={cls["resultList"]}>
-              <li className={cls["resultListItem"]}>
-                <Text className={cls["resultTitle"]}>Общая цена</Text>
-                <Text className={cls["resultValue"]}>
-                  {total}&nbsp;
-                  <small className={cls["resultValuePrice"]}>₱</small>
-                </Text>
-              </li>
-              <li className={cls["resultListItem"]}>
-                <Text className={cls["resultTitle"]}>Доставка</Text>
-                <Text className={cls["resultValue"]}>
-                  {DELIVERY_FEE}&nbsp;
-                  <small className={cls["resultValuePrice"]}>₱</small>
-                </Text>
-              </li>
-              <li className={cls["resultListItem"]}>
-                <Text className={cls["resultTitle"]}>
-                  Итог&nbsp;
-                  <small className={cls["resultValuePrice"]}>
-                    ({items.length})
-                  </small>
-                </Text>
-                <Text className={cls["resultValue"]}>
-                  {total + DELIVERY_FEE}&nbsp;
-                  <small className={cls["resultValuePrice"]}>₱</small>
-                </Text>
-              </li>
-            </ul>
+            <CartResultList
+              total={total}
+              delivery={DELIVERY_FEE}
+              count={items.length}
+            />
             <Button
               variant="large"
               onClick={checkout}

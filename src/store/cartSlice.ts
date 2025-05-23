@@ -3,7 +3,7 @@ import { loadStorageData } from "./storage";
 
 export const CART_PERSISTENT_STATE = "cartData";
 
-interface CartItem {
+export interface CartItem {
   id: number;
   count: number;
 }
